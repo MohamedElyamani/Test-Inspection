@@ -8,7 +8,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-companyequipment-edit',
-  templateUrl: './Companyequipment-edit.component.html',
+  templateUrl: './companyequipment-edit.component.html',
   styleUrls: ['./companyequipment-edit.component.css']
 })
 export class CompanyequipmentEditComponent implements OnInit {
