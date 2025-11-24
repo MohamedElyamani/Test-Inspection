@@ -1,0 +1,93 @@
+ 
+  <form [formGroup]="form" (ngSubmit)="UpdateEquipment()">
+
+    
+     <app-submit-btns
+  [isSaveDisabled]="form.invalid"
+  [showSelected]="false"
+  (reset)="form.reset()">
+</app-submit-btns>
+
+   
+    
+   <div class="card p-3">
+     <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      
+      <div class="row">
+             <div class="invoice-header-field">
+          <label for="EquipmentNo" class="mb-2 d-block">{{'Equipment Number ' | translate}}</label>
+          <input  type="text" id="EquipmentNo" formControlName="EquipmentNo" class="w-100 mb-2" />
+         
+        </div>
+     <div class="col-md-4 mb-5">
+          <label for="Name" class="mb-2 d-block">{{'Name ' | translate}}</label>
+          <input pInputText type="text" id="Name" formControlName="Name" class="w-100 mb-2" />
+          @if (isInvalid('Name')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Name required' | translate}}
+          </p-message>
+          }
+        </div>
+           <div class="col-md-4 mb-5">
+          <label for="SerialNumber" class="mb-2 d-block">{{'SerialNumber ' | translate}}</label>
+          <input pInputText type="text" id="SerialNumber" formControlName="SerialNumber" class="w-100 mb-2" />
+          @if (isInvalid('SerialNumber')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'SerialNumber required' | translate}}
+          </p-message>
+          }
+        </div>
+        
+       
+        
+          <div class="col-md-4 mb-5">
+          <label for="PurchaseDate" class="mb-2 d-block">{{'Purchase Date ' | translate}}</label>
+          <input pInputText type="date" id="PurchaseDate" formControlName="PurchaseDate" class="w-100 mb-2" />
+         
+        </div>
+         <div class="col-md-4 mb-5">
+          <label for="ExpiryDate" class="mb-2 d-block">{{'Expiry Date ' | translate}}</label>
+          <input pInputText type="date" id="ExpiryDate" formControlName="ExpiryDate" class="w-100 mb-2" />
+         
+        </div>
+           <div class="col-md-4 mb-5">
+          <label for="LastMaintenanceDate" class="mb-2 d-block">{{'Last Maintenance Date' | translate}}</label>
+          <input pInputText type="date" id="LastMaintenanceDate" formControlName="LastMaintenanceDate" class="w-100 mb-2" />
+         
+        </div>
+       <div class="col-md-4 mb-5">
+          <label for="MaintenanceIntervalDays" class="mb-2 d-block">{{'Maintenance Interval Days ' | translate}}</label>
+          <input pInputText type="text" id="MaintenanceIntervalDays" formControlName="MaintenanceIntervalDays" class="w-100 mb-2" />
+         
+        </div>
+ <div class="col-md-4 mb-5">
+          <label for="LastCalibrationDate" class="mb-2 d-block">{{'Last Calibration Datee' | translate}}</label>
+          <input pInputText type="date" id="LastCalibrationDate" formControlName="LastCalibrationDate" class="w-100 mb-2" />
+         
+        </div>
+         <div class="col-md-4 mb-5">
+          <label for="NextCalibrationDueDate" class="mb-2 d-block">{{'Next Calibration Due Date' | translate}}</label>
+          <input pInputText type="date" id="NextCalibrationDueDate" formControlName="NextCalibrationDueDate" class="w-100 mb-2" />
+         
+        </div>
+          <div class="col-md-12">
+          <label for="Description" class="mb-2 d-block">{{'Description' | translate}}</label>
+             <textarea
+    pInputText
+    id="Description"
+    formControlName="Description"
+    class="w-100 mb-2"
+    rows="3"
+    autoResize="true"
+    placeholder="Enter Description..."
+  ></textarea>
+     
+        </div>
+        </div>
+      </div>
+    </div>
+  
+    
+  </form>
+

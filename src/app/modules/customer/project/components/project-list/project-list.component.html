@@ -1,0 +1,7 @@
+
+
+<app-data-list [dataSource]="dataSource" [columnsSchema]="columnsSchema" (selectedRows)="onSelectedRows($event)"
+  (rowClick)="navigateToEdit($event)" (onDelete)="deleteSelected($event)">
+</app-data-list>
+
+<router-outlet></router-outlet>

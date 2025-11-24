@@ -1,0 +1,80 @@
+<form [formGroup]="form" (ngSubmit)="createAppCV()">
+
+  <app-submit-btns [isSaveDisabled]="form.invalid" [showSelected]="false" (reset)="form.reset()">
+  </app-submit-btns>
+
+  <div class="card p-3 mt-3">
+    <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      <div class="row">
+        <div class="col-md-4 mb-5">
+          <label for="FullName" class="mb-2 d-block">{{'FullName' | translate}}</label>
+          <input pInputText type="text" id="FullName" formControlName="FullName" class="w-100 mb-2" />
+          @if (isInvalid('FullName')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'FullName is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <div class="col-md-4 mb-5">
+          <label for="Phone" class="mb-2 d-block">{{'PhoneNumber' | translate}}</label>
+          <input pInputText type="text" id="Phone" formControlName="Phone" class="w-100 mb-2" />
+          @if (isInvalid('Phone')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Phone is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <div class="col-md-4 mb-5">
+          <label for="Email" class="mb-2 d-block">{{'Email' | translate}}</label>
+          <input pInputText type="email" id="Email" formControlName="Email" class="w-100 mb-2" />
+          @if (isInvalid('Email')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Email is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- ================== -->
+        <div class="col-md-6 mb-5">
+          <label for="CVUrl" class="mb-2 d-block">{{'CVUrl' | translate}}</label>
+          <input pInputText type="text" id="CVUrl" formControlName="CVUrl" class="w-100 mb-2" />
+          @if (isInvalid('CVUrl')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'CVUrl is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-6 mb-5">
+          <label for="JobReqList" class="mb-2 d-block">{{'Department Name' | translate}}</label>
+          <app-auto-complete class="w-100 mb-2" [data]="JobReqList" [displayField]="['Id', 'JobTitleName']"
+            [searchFields]="['Id', 'JobTitleName']" [valueField]="'Id'" [lookupData]="JobReqList"
+            formControlName="JobRequestId" [readonly]="false"
+            [validStyle]="isInvalid('JobRequestId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('JobRequestId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Department is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- ================== -->
+        <div class="col-md-12 mb-5">
+          <label for="Qualifications" class="mb-2 d-block">{{'Qualifications' | translate}}</label>
+          <input pInputText type="text" id="Qualifications" formControlName="Qualifications" class="w-100 mb-2" />
+          @if (isInvalid('Qualifications')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Qualifications is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- ================== -->
+        <div class="col-md-12 mb-5">
+          <p-checkbox formControlName="IsInterviewed" [binary]="true" />
+          <span class="ms-2">{{'IsInterviewed' | translate}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

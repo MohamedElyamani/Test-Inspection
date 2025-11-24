@@ -1,0 +1,25 @@
+  <form [formGroup]="form" (ngSubmit)="createInspectCategory()">
+    
+    <app-submit-btns
+    [isSaveDisabled]="form.invalid"
+    [showSelected]="false"
+    (reset)="form.reset()">
+  </app-submit-btns>
+ 
+  <div class="card p-3 mt-3">
+      <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="Name" class="mb-2 d-block">{{'Inspector Category Name'| translate}}</label>
+          <input pInputText type="text" id="Name" formControlName="Name" class="w-100 mb-2"/>
+          @if (isInvalid('Name')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+           {{' Inspector Category Name is required'| translate}}
+          </p-message>
+        }
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

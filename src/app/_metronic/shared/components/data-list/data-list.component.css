@@ -1,0 +1,18 @@
+
+.header{
+  background-color: #003049 !important;
+  
+  color: #fff !important;
+  font-weight: bold !important;
+}
+.selecte{
+    background: #90d1bd;
+    cursor: default;
+    margin: unset;
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+}
+:host ::ng-deep .p-table thead tr:nth-child(2) input {
+  color: #000 !important;
+  background-color: #fff !important;
+}

@@ -1,0 +1,81 @@
+  <form [formGroup]="form" (ngSubmit)="createCustomer()">
+     
+    <app-submit-btns
+    [isSaveDisabled]="form.invalid"
+    [showSelected]="false"
+    (reset)="form.reset()">
+  </app-submit-btns>
+  
+  <div class="card p-3 mt-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="EnName" class="mb-2 d-block">{{'English Name'| translate}}</label>
+          <input pInputText type="text" id="EnName" formControlName="EnName" class="w-100 mb-2"/>
+          @if (isInvalid('EnName')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'English Name is required'| translate}}
+          </p-message>
+        }
+        </div>
+
+        <div class="col-md-4">
+          <label for="ArName" class="mb-2 d-block">{{'Arabic Name'| translate}}</label>
+          <input pInputText type="text" id="ArName" formControlName="ArName" class="w-100 mb-2"/>
+          @if (isInvalid('ArName')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Arabic Name is required'| translate}}
+          </p-message>
+        }
+        </div>
+
+        <div class="col-md-4">
+          <label for="Email" class="mb-2 d-block">{{'Email'| translate}}</label>
+          <input pInputText type="email" id="Email" formControlName="Email" class="w-100 mb-2"/>
+          @if (isInvalid('Email')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Email is required'| translate}}
+          </p-message>
+        }
+        </div>
+
+        <div class="col-md-4">
+          <label for="PrimaryMobileNumber" class="mb-2 d-block">{{'Mobile Number' | translate}}</label>
+          <input pInputText type="text" id="PrimaryMobileNumber" formControlName="PrimaryMobileNumber" class="w-100 mb-2"/>
+          @if (isInvalid('PrimaryMobileNumber')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Mobile Number is required'| translate}}
+          </p-message>
+        }
+        </div>
+
+        <div class="col-md-4">
+          <label for="SecondryMobileNumber" class="mb-2 d-block">{{'Another Mobile Number'| translate}}</label>
+          <input pInputText type="text" id="SecondryMobileNumber" formControlName="SecondryMobileNumber" class="w-100 mb-2"/>
+        </div>
+
+        <div class="col-md-4">
+          <label for="ContactPerson" class="mb-2 d-block">{{'Contact Person'| translate}}</label>
+          <input pInputText type="text" id="ContactPerson" formControlName="ContactPerson" class="w-100 mb-2"/>
+          @if (isInvalid('ContactPerson')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Contact Person is required'| translate}}
+          </p-message>
+        }
+        </div>
+
+
+
+        <div class="col-md-12">
+          <label for="Address" class="mb-2 d-block">{{'Fully Address'| translate}}</label>
+          <input pInputText type="text" id="Address" formControlName="Address" class="w-100 mb-2"/>
+          @if (isInvalid('Address')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Address is required'| translate}}
+          </p-message>
+        }
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

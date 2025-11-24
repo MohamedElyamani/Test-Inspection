@@ -1,0 +1,35 @@
+
+
+<div class="d-flex gap-2 p-3">
+  <!-- Add -->
+  <button *ngIf="showAdd"
+  class="btn addBtn btn-primary btn-sm"
+  (click)="onAddClick()"
+  >
+   <i class="fa-solid fa-plus  ms-2"></i>
+ Create
+  </button>
+
+  <div *ngIf="hasSelection" class="d-flex gap-2">
+    <!-- Print -->
+    <button *ngIf="showPrint"
+            class="btn printBtn btn-secondary btn-sm"
+            (click)="print()"
+            >
+            <i class="fa-solid fa-print  ms-2"></i>
+            print
+      
+    </button>
+
+    <!-- Delete -->
+    <button *ngIf="showDelete"
+            class="btn deleteBtn btn-danger btn-sm"
+            
+            (click)="confirmDelete($event)"
+            >
+      <i class="fa-solid fa-trash ms-2"></i>
+      Delete
+    </button>
+  </div>
+</div>
+

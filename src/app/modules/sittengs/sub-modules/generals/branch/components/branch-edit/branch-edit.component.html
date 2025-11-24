@@ -1,0 +1,63 @@
+
+ <form [formGroup]="form" (ngSubmit)="updateBranch()">
+    <div class="d-flex align-items-center">
+          <app-action-btns 
+          [showAdd]="true"
+          [showPrint]="true"
+          [showDelete]="false"
+          (onAdd)="navigateToCreate()"
+          >
+        </app-action-btns>
+        <app-submit-btns
+          [isSaveDisabled]="form.invalid"
+          [showSelected]="false"
+          (reset)="form.reset()">
+        </app-submit-btns>
+    </div>
+
+  <div class="card p-3 mt-3">
+       <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="NameAr" class="mb-2 d-block">{{'Branch Name Ar' | translate}}</label>
+          <input pInputText type="text" id="NameAr" formControlName="NameAr" class="w-100 mb-2"/>
+          @if (isInvalid('NameAr')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Branch Name Ar is required' | translate}}
+          </p-message>
+        }
+        </div>
+        <div class="col-md-6">
+          <label for="NameEn" class="mb-2 d-block">{{'Branch Name En'| translate}}</label>
+          <input pInputText type="text" id="NameEn" formControlName="NameEn" class="w-100 mb-2"/>
+          @if (isInvalid('NameEn')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Branch Name En is required'|translate}}
+          </p-message>
+        }
+        </div>
+
+        <div class="col-md-6">
+          <label for="Address" class="mb-2 d-block">{{'Address'| translate}}</label>
+          <input pInputText type="text" id="Address" formControlName="Address" class="w-100 mb-2"/>
+          @if (isInvalid('Address')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Address is required'| translate}}
+          </p-message>
+        }
+</div>
+        <div class="col-md-6">
+          <label for="Phone" class="mb-2 d-block">{{'Phone'| translate}}</label>
+          <input pInputText type="text" id="Phone" formControlName="Phone" class="w-100 mb-2"/>
+          @if (isInvalid('Phone')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Phone is required'| translate}}
+          </p-message>
+        }
+        </div>
+    
+    </div> 
+  </div>  
+</div>
+</form>

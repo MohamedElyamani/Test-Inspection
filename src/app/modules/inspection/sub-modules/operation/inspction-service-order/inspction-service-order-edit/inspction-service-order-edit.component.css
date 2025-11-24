@@ -1,0 +1,65 @@
+.table-input td {
+  border: 1px solid #dee2e6;
+  padding: 0 !important;
+  vertical-align: middle;
+}
+
+/* إزالة الحدود من جميع أنواع الـ inputs داخل الجدول */
+.table-input input,
+:host ::ng-deep .table-input app-auto-complete input {
+  border: none !important;
+  width: 100%;
+  height: 100%;
+  padding: 8px 10px;
+  box-shadow: none;
+  background: transparent;
+  text-align: center;
+}
+
+.table-input th {
+  border: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+  font-weight: 600;
+  text-align: center;
+}
+
+.addItem{
+    width: fit-content;
+}
+.addItem i{
+    border: 1px solid #31D8CE;
+    color: #31D8CE;
+    font-size: 1.5rem;
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 2.7rem;
+    cursor: pointer;
+}
+.invoice-header-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+.invoice-header-field input {
+  background: transparent;  
+  border: none;             
+  border-radius: 0;
+  font-size: 22px;
+  
+  font-weight: 600;
+  color: #33333394;
+  padding: 0px 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #3333331a;
+}
+
+.invoice-header-field input:focus {
+  outline: none;             /* No outline */
+  background: transparent;
+}

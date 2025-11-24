@@ -1,0 +1,64 @@
+<app-data-list
+  [dataSource]="dataSource"
+  [columnsSchema]="columnsSchema"
+  (selectedRows)="onSelectedRows($event)"
+  (rowClick)="navigateToEdit($event)"
+  (onDelete)="deleteSelected($event)"
+>
+</app-data-list>
+
+<!-- Status Column Template -->
+<ng-template #statusTemplate let-row="row">
+  <span
+    class="badge"
+    [ngClass]="getStatusBadgeClass(row.Status)"
+    style="cursor: pointer;"
+    (click)="openStatusDropdown($event, row)"
+  >
+    {{ row.Status }}
+  </span>
+</ng-template>
+
+<!-- Dialog for Editing Status -->
+<p-dialog
+  header="Change Status"
+  [(visible)]="showStatusDialog"
+  [modal]="true"
+  [closable]="true"
+  [style]="{ width: '30vw' }"
+  [contentStyle]="{ 'overflow-y': 'visible' }"
+>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="status">Select Status</label>
+      <p-dropdown
+        [options]="statusOptions"
+        [(ngModel)]="selectedStatus"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select status"
+        [style]="{ width: '100%' }"
+        (onChange)="onStatusChange($event)"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <!-- FIXED FOOTER -->
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      label="Cancel"
+      class="p-button-text"
+      (click)="showStatusDialog = false"
+    ></button>
+
+    <button
+      pButton
+      label="Save"
+      class="p-button-primary"
+      (click)="saveStatus()"
+      [disabled]="selectedStatus === selectedOrder?.Status"
+    ></button>
+  </ng-template>
+</p-dialog>
+

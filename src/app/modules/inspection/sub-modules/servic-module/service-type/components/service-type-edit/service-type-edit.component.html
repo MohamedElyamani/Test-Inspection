@@ -1,0 +1,39 @@
+  <form [formGroup]="form" (ngSubmit)="updateService()">
+
+ 
+        <app-submit-btns
+          [isSaveDisabled]="form.invalid"
+          [showSelected]="false"
+          (reset)="form.reset()">
+        </app-submit-btns>
+    
+    
+  <div class="card p-3">
+       <!--<app-breadcrump></app-breadcrump> -->
+     <div class="container-fluid mx-4">
+      <div class="row">
+            <div class="col-md-4">
+            <label for="Name" class="mb-2 d-block">{{' Service Type Name' | translate}}</label>
+            <input pInputText type="text" id="Name" formControlName="Name" class="w-100 mb-2"/>
+            @if (isInvalid('Name')) {
+            <p-message severity="error" class="text-danger" size="small" variant="simple">
+                {{' Service Type Name is required' | translate}}
+            </p-message>
+            }
+            </div>
+
+         
+<div class="col-md-4">
+  <label for="Description" class="mb-2 d-block">{{ 'Description' | translate }}</label>
+  <input pInputText type="text" id="Description" formControlName="Description" class="w-100 mb-2"/>
+  @if (isInvalid('Description')) {
+    <p-message severity="error" class="text-danger" size="small" variant="simple">
+      {{ 'Description is required' | translate }}
+    </p-message>
+  }
+</div>
+
+    </div>
+    </div>
+  </div>
+</form>

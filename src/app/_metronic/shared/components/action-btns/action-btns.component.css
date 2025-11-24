@@ -1,0 +1,81 @@
+/* =========================
+   REMOVE BACKGROUND / SHADOW
+   ========================= */
+
+.o_control_panel,
+.o_control_panel * {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Remove spacing that creates empty toolbar space */
+.o_control_panel {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* =========================
+   ACTION BUTTON WRAPPER
+   ========================= */
+
+.app-action-btns,
+.app-action-btns > div {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+/* Remove default padding from toolbar container */
+.d-flex.align-items-center.gap-2.p-2,
+.d-flex.p-3 {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* =========================
+   BUTTON STYLE
+   ========================= */
+
+.d-flex .btn,
+.app-action-btns button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: #003366;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-size: 15px;
+  padding: 0.3rem 0.6rem !important;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+
+
+/* Remove focus glow */
+.d-flex .btn:focus,
+.app-action-btns button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* =========================
+   ICON STYLE
+   ========================= */
+
+.d-flex .btn i,
+.app-action-btns button i {
+  font-size: 15px;
+  color: #003366 !important;
+}
+
+/* Consistent spacing if needed */
+.gap-2 {
+  gap: 1rem !important;
+}

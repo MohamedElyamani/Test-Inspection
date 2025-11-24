@@ -1,0 +1,208 @@
+
+<app-delete-dialog
+  #deleteDialog
+  (onDeleteConfirmed)="onDeleteConfirmed()"
+  (onDeleteCancelled)="onDeleteCancelled()"
+>
+</app-delete-dialog>
+
+<div class="container-fluid mx-4" style="background-color: white;">
+  <div class="row my-3">
+<app-breadcrump></app-breadcrump>
+</div>
+  <div class="row shadow-sm border px-8 py-10">
+    <div class="row">
+      <div class="language">
+      <p-dropdown
+  [options]="languages"
+  [(ngModel)]="selectedLanguage"
+  optionLabel="DisplayName"
+  placeholder="Select a Language"
+  (ngModelChange)="getLocalization()"
+  class="mb-10"
+/>
+
+      </div>
+    </div>
+  
+    <div class="row">
+      <p-table
+        #dt
+        [value]="localization"
+        [paginator]="true"
+        [rows]="6"
+        [responsive]="true"
+        class="my-5"
+      >
+        <!-- selectionMode="single" [(selection)]="selectedData" field="id" (onRowSelect)="onCustomerSelect($event)" -->
+        <ng-template pTemplate="header">
+          <!-- <tr class="border-bottom">
+                  <th><input type="text" pInputText (input)="filterGlobal($event, 'caption')" placeholder="Search by caption" /></th>
+                  <th><input type="text" pInputText (input)="filterGlobal($event, 'translate')" placeholder="Search by translate" /></th>
+                  <th><input type="text" pInputText (input)="filterGlobal($event, 'country')" placeholder="Search by Country" /></th>
+              </tr> -->
+          <tr class="border-bottom">
+            <th>
+              Caption
+              <p-columnFilter
+                type="text"
+                field="Caption"
+                class="m-0"
+                display="menu"
+              />
+            </th>
+            <th>
+              Translate
+              <p-columnFilter
+                type="text"
+                field="Translate"
+                class="m-0"
+                display="menu"
+              />
+            </th>
+            <th>
+              Tooltip
+              <p-columnFilter
+                type="text"
+                field="Tooltip"
+                class="m-0"
+                display="menu"
+              />
+            </th>
+            <th>
+              System
+              <p-columnFilter
+                type="boolean"
+                field="System"
+                class="m-0"
+                display="menu"
+              />
+            </th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-locale>
+          <tr class="border-bottom" [pSelectableRow]="locale">
+            <td>{{ locale.Caption }}</td>
+            <td>{{ locale.Translate }}</td>
+            <td>{{ locale.Tooltip }}</td>
+            <td>
+              <i
+                *ngIf="locale.System === true"
+                class="pi pi-check-circle"
+                style="color: green"
+              ></i>
+              <i
+                *ngIf="locale.System === false"
+                class="pi pi-times-circle"
+                style="color: red"
+              ></i>
+            </td>
+  <td>
+  <!-- ✅ EDIT BUTTON -->
+  <button
+    pButton
+    type="button"
+    pRipple
+    class="p-button-rounded p-button-info p-button-text"
+    pTooltip="Edit"
+    tooltipPosition="bottom"
+    (click)="onEditLocale(locale)"
+  >
+    <i class="fas fa-edit"></i>
+  </button>
+
+  <!-- ✅ DELETE BUTTON -->
+  <button
+    pButton
+    type="button"
+    pRipple
+    class="p-button-rounded p-button-danger p-button-text"
+    pTooltip="Delete"
+    tooltipPosition="bottom"
+    (click)="onDeleteLocale(locale)"
+  >
+    <i class="fas fa-trash"></i>
+  </button>
+</td>
+
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  
+    <a
+      *ngIf="viewAddButton"
+      class="btn btn-sm fw-semibold btn-primary px-5"
+      (click)="showDialog()"
+    >
+      New Locale
+    </a>
+    <p-dialog
+      header="Add Locale"
+      [modal]="true"
+      [(visible)]="visible"
+      [style]="{ width: '30rem' }"
+    >
+      <!-- <span class="p-text-secondary block mb-8">Update your information.</span> -->
+      <form [formGroup]="localeForm">
+        <div class="d-flex justify-content-between flex-nowrap gap-4 my-8">
+          <label for="caption" class="font-semibold w-25 ms-2 text-nowrap"
+            >Caption <span class="text-danger"> *</span></label
+          >
+          <input
+            pInputText
+            id="caption"
+            autocomplete="off"
+            formControlName="caption"
+          />
+        </div>
+        <div class="d-flex justify-content-between flex-nowrap gap-4 mb-8">
+          <label for="translate" class="font-semibold w-25 ms-2 text-nowrap"
+            >Translate <span class="text-danger"> *</span></label
+          >
+          <input
+            pInputText
+            id="translate"
+            autocomplete="off"
+            formControlName="translate"
+          />
+        </div>
+  
+        <div class="d-flex justify-content-between flex-nowrap gap-4 mb-8">
+          <label for="tooltip" class="font-semibold w-25 ms-2">Tooltip</label>
+          <input
+            pInputText
+            id="tooltip"
+            autocomplete="off"
+            formControlName="tooltip"
+          />
+        </div>
+        <div class="d-flex justify-content-between flex-nowrap gap-4 mb-8">
+          <!-- <label for="system" class="font-semibold w-24 ms-2">System</label> -->
+          <p-checkbox [binary]="true" formControlName="system" label="System" />
+  
+          <!-- <input pInputText id="system" class="flex-auto" autocomplete="off" formControlName="system"/> -->
+        </div>
+        <div class="flex justify-end gap-2">
+          <a
+            type="button"
+            (click)="clearForm()"
+            class="btn btn-sm fw-semibold btn-secondary px-5"
+            >Cancle</a
+          >
+        <a
+  class="btn btn-sm fw-semibold btn-primary px-5"
+  *ngIf="localeForm.valid"
+  (click)="selectedLocaleId ? updateLocale() : insertLocale()"
+>
+  Save
+</a>
+
+        </div>
+      </form>
+    </p-dialog>
+  </div>
+</div>
+ <!--a-->

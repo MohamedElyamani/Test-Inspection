@@ -1,0 +1,110 @@
+<form [formGroup]="form" (ngSubmit)="createEmployee()">
+
+  <app-submit-btns [isSaveDisabled]="form.invalid" [showSelected]="false" (reset)="form.reset()">
+  </app-submit-btns>
+
+  <div class="card p-3 mt-3">
+    <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      <div class="row"> 
+        <div class="col-md-4 mb-5">
+          <label for="FullName" class="mb-2 d-block">{{'FullName' | translate}}</label>
+          <input pInputText type="text" id="FullName" formControlName="FullName" class="w-100 mb-2" />
+          @if (isInvalid('FullName')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'FullName is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label for="EmployeeCode" class="mb-2 d-block">{{'EmployeeCode' | translate}}</label>
+          <input pInputText type="text" id="EmployeeCode" formControlName="EmployeeCode" class="w-100 mb-2" />
+          @if (isInvalid('EmployeeCode')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'EmployeeCode is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label for="PhotoUrl" class="mb-2 d-block">{{'PhotoUrl' | translate}}</label>
+          <input pInputText type="text" id="PhotoUrl" formControlName="PhotoUrl" class="w-100 mb-2" />
+          @if (isInvalid('PhotoUrl')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'PhotoUrl is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- =================== -->
+
+        <div class="col-md-3 mb-5">
+          <label for="AppCVList" class="mb-2 d-block">{{'Application CV Name' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="AppCVList" [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']" [valueField]="'Id'" [lookupData]="AppCVList"
+            formControlName="CVId" [readonly]="false"
+            [validStyle]="isInvalid('CVId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('CVId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Application CV is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-3 mb-5">
+          <label for="DepartmentList" class="mb-2 d-block">{{'Department Name' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="DepartmentList" [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']" [valueField]="'Id'" [lookupData]="DepartmentList"
+            formControlName="DepartmentId" [readonly]="false"
+            [validStyle]="isInvalid('DepartmentId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('DepartmentId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Department is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-3 mb-5">
+          <label for="JobTitleList" class="mb-2 d-block">{{'Job Title' | translate}}</label>
+          <app-auto-complete class="w-100 mb-2" [data]="JobTitleList" [displayField]="['Id', 'Title']"
+            [searchFields]="['Id', 'Title']" [valueField]="'Id'" [lookupData]="JobTitleList"
+            formControlName="JobTitleId" [readonly]="false"
+            [validStyle]="isInvalid('JobTitleId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('JobTitleId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Job Title is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-3 mb-5">
+          <label for="NationalId" class="mb-2 d-block">{{'NationalId' | translate}}</label>
+          <input pInputText type="text" id="NationalId" formControlName="NationalId" class="w-100 mb-2" />
+          @if (isInvalid('NationalId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'NationalId is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- =================== -->
+         <div class="col-md-12">
+          <label for="Qualifications" class="mb-2 d-block">{{'Qualifications' | translate}}</label>
+          <input pInputText type="text" id="Qualifications" formControlName="Qualifications" class="w-100 mb-2" />
+          @if (isInvalid('Qualifications')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Qualifications is required' | translate}}
+          </p-message>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

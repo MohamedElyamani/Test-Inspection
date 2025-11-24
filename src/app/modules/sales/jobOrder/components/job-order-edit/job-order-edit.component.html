@@ -1,0 +1,236 @@
+
+
+<form [formGroup]="form" (ngSubmit)="updateJobOrder()">
+
+  
+    <app-submit-btns
+      [isSaveDisabled]="form.invalid"
+      [showSelected]="false"
+      (reset)="form.reset()">
+    </app-submit-btns>
+  
+
+  <div class="card p-3">
+           <!--<app-breadcrump></app-breadcrump> -->
+
+    <div class="container-fluid mx-4">
+      <div class="row">
+
+        <!-- Job Order Number -->
+        <div class="invoice-header-field">
+          <label for="JobOrderNo" class="mb-2 d-block">{{ 'Job Order' | translate }}</label>
+          <input  type="text" id="JobOrderNo" formControlName="JobOrderNo" class="w-100 mb-2" readonly/>
+       
+        </div>
+
+        <!-- Quotation Number -->
+        <div class="col-md-4 mb-5">
+          <label for="QuotationNo" class="mb-2 d-block">{{ 'Quotation Number' | translate }}</label>
+          <app-auto-complete
+            [data]="quotationList"
+            [displayField]="['QuotationNo']"
+            [searchFields]="['QuotationNo']"
+            [valueField]="'QuotationNo'"
+            [lookupData]="quotationList"
+            formControlName="QuotationNo"
+            [readonly]="false"
+            [validStyle]="isInvalid('QuotationNo') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          <p-message *ngIf="isInvalid('QuotationNo')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Quotation Number is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Inspector Category -->
+        <div class="col-md-4 mb-5">
+          <label for="InspectorCategoryId" class="mb-2 d-block">{{ 'Inspector Category' | translate }}</label>
+          <app-auto-complete
+            [data]="inspectorCategList"
+            [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']"
+            [valueField]="'Id'"
+            [lookupData]="inspectorCategList"
+            formControlName="InspectorCategoryId"
+            [readonly]="false"
+            [validStyle]="isInvalid('InspectorCategoryId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          <p-message *ngIf="isInvalid('InspectorCategoryId')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Inspector Category is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Assigned To -->
+        <div class="col-md-4 mb-5">
+          <label for="AssignedTo" class="mb-2 d-block">{{ 'Assigned To' | translate }}</label>
+          <app-auto-complete
+            [data]="filteredInspectorList"
+            [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']"
+            [valueField]="'Id'"
+            [lookupData]="filteredInspectorList"
+            formControlName="AssignedTo"
+            [readonly]="false"
+            [validStyle]="isInvalid('AssignedTo') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          <p-message *ngIf="isInvalid('AssignedTo')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Assigned To is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Customer Name -->
+        <div class="col-md-4 mb-5">
+          <label for="CustomerId" class="mb-2 d-block">{{ 'Customer Name' | translate }}</label>
+          <app-auto-complete
+            [data]="customerList"
+            [displayField]="['Id', 'EnName', 'ArName']"
+            [searchFields]="['Id', 'EnName', 'ArName']"
+            [valueField]="'Id'"
+            [lookupData]="customerList"
+            formControlName="CustomerId"
+            [readonly]="false"
+            [validStyle]="isInvalid('CustomerId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          <p-message *ngIf="isInvalid('CustomerId')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Customer is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Location -->
+        <div class="col-md-4 mb-5">
+          <label for="LocationId" class="mb-2 d-block">{{ 'Location' | translate }}</label>
+          <app-auto-complete
+            [data]="LocationList"
+            [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']"
+            [valueField]="'Id'"
+            [lookupData]="LocationList"
+            formControlName="LocationId"
+            [readonly]="false"
+            [validStyle]="isInvalid('LocationId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          <p-message *ngIf="isInvalid('LocationId')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Location is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Project -->
+        <div class="col-md-4 mb-5">
+          <label for="ProjectId" class="mb-2 d-block">{{ 'Project' | translate }}</label>
+          <app-auto-complete
+            [data]="ProjectList"
+            [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']"
+            [valueField]="'Id'"
+            [lookupData]="ProjectList"
+            formControlName="ProjectId"
+            [readonly]="false"
+            [validStyle]="isInvalid('ProjectId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          <p-message *ngIf="isInvalid('ProjectId')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Project is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Job Order Type -->
+        <div class="col-md-4 mb-5">
+          <label for="JobOrderTypeServicesTypeId" class="mb-2 d-block">{{ 'Job Order Type' | translate }}</label>
+          <app-auto-complete
+            [data]="servTypeList"
+            [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']"
+            [valueField]="'Id'"
+            [lookupData]="servTypeList"
+            formControlName="JobOrderTypeServicesTypeId"
+            [readonly]="false"
+            [validStyle]="isInvalid('JobOrderTypeServicesTypeId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          <p-message *ngIf="isInvalid('JobOrderTypeServicesTypeId')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Job Order Type is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Inspection Method -->
+        <div class="col-md-4 mb-5">
+          <label for="InspectionMethodId" class="mb-2 d-block">{{ 'Inspection Method' | translate }}</label>
+          <app-auto-complete
+            [data]="inspectionList"
+            [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']"
+            [valueField]="'Id'"
+            [lookupData]="inspectionList"
+            formControlName="InspectionMethodId"
+            [readonly]="false"
+            [validStyle]="isInvalid('InspectionMethodId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+       
+        </div>
+
+        <!-- Service List -->
+        <div class="col-md-4 mb-5">
+          <label for="ServiceList" class="mb-2 d-block">{{ 'Service List' | translate }}</label>
+          <input pInputText type="text" id="ServiceList" formControlName="ServiceList" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('ServiceList')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Service List required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Site Contact Name -->
+        <div class="col-md-4 mb-5">
+          <label for="SiteContactName" class="mb-2 d-block">{{ 'Site Contact Name' | translate }}</label>
+          <input pInputText type="text" id="SiteContactName" formControlName="SiteContactName" class="w-100 mb-2" />
+        </div>
+
+        <!-- Site Contact Mobile -->
+        <div class="col-md-4 mb-5">
+          <label for="SiteContactMobile" class="mb-2 d-block">{{ 'Site Contact Mobile' | translate }}</label>
+          <input pInputText type="text" id="SiteContactMobile" formControlName="SiteContactMobile" class="w-100 mb-2" />
+        </div>
+
+        <!-- Site Contact Email -->
+        <div class="col-md-4 mb-5">
+          <label for="SiteContactEmail" class="mb-2 d-block">{{ 'Site Contact Email' | translate }}</label>
+          <input pInputText type="email" id="SiteContactEmail" formControlName="SiteContactEmail" class="w-100 mb-2" />
+        </div>
+
+        <!-- Dates -->
+        <div class="col-md-4 mb-5">
+          <label for="DateFrom" class="mb-2 d-block">{{ 'Date From' | translate }}</label>
+          <input pInputText type="date" id="DateFrom" formControlName="DateFrom" class="w-100 mb-2" />
+        </div>
+        <div class="col-md-4 mb-5">
+          <label for="DateTo" class="mb-2 d-block">{{ 'Date To' | translate }}</label>
+          <input pInputText type="date" id="DateTo" formControlName="DateTo" class="w-100 mb-2" />
+        </div>
+
+        <!-- Description -->
+        <div class="col-md-12 mb-5">
+          <label for="Description" class="mb-2 d-block">{{ 'Description' | translate }}</label>
+            <textarea
+    pInputText
+    id="Description"
+    formControlName="Description"
+    class="w-100 mb-2"
+    rows="4"
+    autoResize="true"
+    placeholder="Enter Description..."
+  ></textarea>
+        </div>
+
+        <!-- Comments -->
+        <div class="col-md-12 mb-5">
+          <label for="Comments" class="mb-2 d-block">{{ 'Comments' | translate }}</label>
+           <textarea
+    pInputText
+    id="Comments"
+    formControlName="Comments"
+    class="w-100 mb-2"
+    rows="4"
+    autoResize="true"
+    placeholder="Enter comments..."
+  ></textarea>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>

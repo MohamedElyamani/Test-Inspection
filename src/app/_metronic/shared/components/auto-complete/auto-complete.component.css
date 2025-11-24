@@ -1,0 +1,57 @@
+/* Dropdown background */
+.p-dropdown-panel {
+  background-color: #fff !important;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  
+  /* 👇 Added fixes */
+  position: absolute !important;
+  z-index: 99999 !important;
+  width: 100% !important;
+}
+
+/* عناصر القائمة */
+.p-dropdown-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.p-dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* Footer full clickable */
+.more-filter-footer {
+  background: #f0f0f0;
+  color: #0d9488; 
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-top: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  position: relative;
+  z-index: 2;
+}
+.more-filter-footer:hover {
+  background: #0d9488;
+  color: #fff;
+}
+
+.footer-content {
+  width: 100%;
+  user-select: none;
+}
+
+.footer-content i {
+  font-size: 1rem;
+}
+
+/* 👇 Added helper to prevent clipping */
+.dropdown-wrapper,
+.p-dropdown {
+  position: relative !important;
+  overflow: visible !important;
+}

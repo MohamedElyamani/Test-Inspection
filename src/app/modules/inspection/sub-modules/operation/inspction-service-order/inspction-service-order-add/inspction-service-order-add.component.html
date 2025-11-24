@@ -1,0 +1,175 @@
+
+<form [formGroup]="form"  autocomplete="off" (ngSubmit)="createInspectionReq()">
+ 
+  <app-submit-btns [isSaveDisabled]="form.invalid" [showSelected]="false" (reset)="form.reset()">
+  </app-submit-btns>
+
+  <div class="card p-3">
+      <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      <div class="row">
+       <div class="invoice-header-field">
+  <label for="RequestNumber">{{ 'Request Number' | translate }}</label>
+  <input type="text" id="RequestNumber" formControlName="RequestNumber" />
+
+</div>
+
+
+        <div class="col-md-4 mb-5">
+          <label for="ItemToBeInspected" class="mb-2 d-block">{{'Item To Be Inspected' | translate}}</label>
+          <input pInputText type="text" id="ItemToBeInspected" formControlName="ItemToBeInspected" class="w-100 mb-2" />
+          @if (isInvalid('ItemToBeInspected')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'ItemToBeInspected is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+   
+
+        <div class="col-md-4 mb-5">
+          <label for="EquipmentQty" class="mb-2 d-block">{{'Equipment Quatity' | translate}}</label>
+          <p-inputnumber inputId="EquipmentQty" formControlName="EquipmentQty" class="w-100 mb-2" />
+          @if (isInvalid('EquipmentQty')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'EquipmentQty is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- ================================== -->
+        <div class="col-md-4 mb-5">
+          <label for="servTypeList" class="mb-2 d-block">{{'Request Type' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="servTypeList" [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']" [valueField]="'Id'" [lookupData]="servTypeList"
+            formControlName="ServiceTypeId" [readonly]="false"
+            [validStyle]="isInvalid('ServiceTypeId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('ServiceTypeId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'RequestType is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+   
+        <div class="col-md-4 mb-5">
+          <label for="LocationList" class="mb-2 d-block">{{'Location Name' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="LocationList" [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']" [valueField]="'Id'" [lookupData]="LocationList" formControlName="LocationId"
+            [readonly]="false" [validStyle]="isInvalid('LocationId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('LocationId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Location is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label for="ProjectList" class="mb-2 d-block">{{'Project' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="ProjectList" [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']" [valueField]="'Id'" [lookupData]="ProjectList" formControlName="ProjectId"
+            [readonly]="false" [validStyle]="isInvalid('ProjectId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('ProjectId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Project is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- ================================== -->
+        
+
+        <div class="col-md-4 mb-5">
+          <label for="StatusList" class="mb-2 d-block">{{'Status' | translate}}</label>
+
+          <p-dropdown [options]="StatusList" optionLabel="Name" optionValue="Id" formControlName="Status"
+            [filter]="true" placeholder="{{ 'Select status' | translate }}" [showClear]="true"
+            [style]="{ width: '100%' }">
+          </p-dropdown>
+
+          @if (isInvalid('Status')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Status is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+   
+
+  
+        <!-- ================================== -->
+        <div class="col-md-4 mb-5">
+          <label for="ContactPerson" class="mb-2 d-block">{{'Contact Person' | translate}}</label>
+          <input pInputText type="text" id="ContactPerson" formControlName="ContactPerson" class="w-100 mb-2" />
+          @if (isInvalid('ContactPerson')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'ContactPerson is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label for="ContactPersonPhone" class="mb-2 d-block">{{'Contact Person Phone' | translate}}</label>
+          <input pInputText type="text" id="ContactPersonPhone" formControlName="ContactPersonPhone"
+            class="w-100 mb-2" />
+          @if (isInvalid('ContactPersonPhone')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'ContactPersonPhone is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label for="ContactPersonEmail" class="mb-2 d-block">{{'Contact Person Email' | translate}}</label>
+          <input pInputText type="email" id="ContactPersonEmail" formControlName="ContactPersonEmail"
+            class="w-100 mb-2" />
+          @if (isInvalid('ContactPersonEmail')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'ContactPersonEmail is required' | translate}}
+          </p-message>
+          }
+        </div>
+   <div class="col-md-4 mb-5">
+          <label for="AvailableDate" class="mb-2 d-block">{{'Available Date' | translate}}</label>
+          <p-datePicker [showIcon]="true" id="AvailableDate" formControlName="AvailableDate" class="w-100 mb-2" />
+          @if (isInvalid('AvailableDate')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'AvailableDate is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label for="RequestDate" class="mb-2 d-block">{{'Request Date' | translate}}</label>
+          <p-datePicker [showIcon]="true" id="RequestDate" formControlName="RequestDate" class="w-100 mb-2" />
+          @if (isInvalid('RequestDate')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'RequestDate is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- ================================== -->
+        <div class="col-md-12">
+          <label for="Notes" class="mb-2 d-block">{{'Notes' | translate}}</label>
+                <textarea
+    pInputText
+    id="Notes"
+    formControlName="Notes"
+    class="w-100 mb-2"
+    rows="3"
+    autoResize="true"
+    placeholder="Enter Notes..."
+  ></textarea>
+     
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

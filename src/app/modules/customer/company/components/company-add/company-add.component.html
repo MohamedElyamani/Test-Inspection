@@ -1,0 +1,34 @@
+  <form [formGroup]="form" (ngSubmit)="createCompany()">
+   
+    <app-submit-btns
+    [isSaveDisabled]="form.invalid"
+    [showSelected]="false"
+    (reset)="form.reset()">
+  </app-submit-btns>
+ 
+  <div class="card p-3 mt-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="companyName" class="mb-2 d-block">{{'Company Name'| translate}}</label>
+          <input pInputText type="text" id="companyName" formControlName="Name" class="w-100 mb-2"/>
+          @if (isInvalid('Name')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Company Name is required'| translate}}
+          </p-message>
+        }
+        </div>
+
+        <div class="col-md-6">
+          <label for="companyAddress" class="mb-2 d-block">{{'Company Address'| translate}}</label>
+          <input pInputText type="text" id="companyAddress" formControlName="Address" class="w-100 mb-2"/>
+          @if (isInvalid('Address')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Company Address is required'| translate}}
+          </p-message>
+        }
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

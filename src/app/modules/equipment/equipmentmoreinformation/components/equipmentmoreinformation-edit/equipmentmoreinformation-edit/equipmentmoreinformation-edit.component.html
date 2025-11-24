@@ -1,0 +1,68 @@
+  <form [formGroup]="form" (ngSubmit)="UpdateEquipment()">
+
+    
+     <app-submit-btns
+  [isSaveDisabled]="form.invalid"
+  [showSelected]="false"
+  (reset)="form.reset()">
+</app-submit-btns>
+
+   
+    
+   <div class="card p-3">
+        <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      
+      <div class="row">
+        
+   <div class="col-md-4 mb-5">
+          <label for="EquipmentList" class="mb-2 d-block">{{'Equipment Name' | translate}}</label>
+
+         <app-auto-complete
+  class="w-100 mb-2"
+  [data]="EquipmentList"
+  [displayField]="['Name', 'seriesEquipmentNo']"
+  [searchFields]="['Name', 'seriesEquipmentNo']"
+  [valueField]="'Id'"
+  [lookupData]="EquipmentList"
+  formControlName="EquipmentId"
+  [readonly]="false"
+  [validStyle]="isInvalid('EquipmentId') ? 'ng-invalid' : ''">
+</app-auto-complete>
+
+          @if (isInvalid('Id')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Equipment Name is required' | translate}}
+          </p-message>
+          }
+        </div>
+   
+        <div class="col-md-4 mb-5">
+          <label for="KeyName" class="mb-2 d-block">{{'Information Name' | translate}}</label>
+          <input pInputText type="text" id="KeyName" formControlName="KeyName" class="w-100 mb-2" />
+
+          @if (isInvalid('KeyName')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Information Name required' | translate}}
+          </p-message>
+          }
+        </div>
+     
+     
+   <div class="col-md-4 mb-5">
+          <label for="KeyValue" class="mb-2 d-block">{{'Infomation Value' | translate}}</label>
+<input pInputText type="text" id="KeyValue" formControlName="KeyValue" class="w-100 mb-2" />
+          @if (isInvalid('KeyValue')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Infomation Value  required' | translate}}
+          </p-message>
+          }
+        </div>
+       
+      
+        </div>
+      </div>
+    </div>
+  
+    
+  </form>

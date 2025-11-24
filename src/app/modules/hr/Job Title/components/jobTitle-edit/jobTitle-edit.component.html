@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="updateDepartment()">
+
+  <app-submit-btns [isSaveDisabled]="form.invalid" [showSelected]="false" (reset)="form.reset()">
+  </app-submit-btns>
+
+
+  <div class="card p-3">
+    <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="Title" class="mb-2 d-block">{{'JobTitle' | translate}}</label>
+          <input pInputText type="text" id="Title" formControlName="Title" class="w-100 mb-2" />
+          @if (isInvalid('Title')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'JobTitle is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-6">
+          <label for="DepartmentList" class="mb-2 d-block">{{'Department Name' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="DepartmentList" [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']" [valueField]="'Id'" [lookupData]="DepartmentList"
+            formControlName="DepartmentId" [readonly]="false"
+            [validStyle]="isInvalid('DepartmentId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('DepartmentId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Department is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>

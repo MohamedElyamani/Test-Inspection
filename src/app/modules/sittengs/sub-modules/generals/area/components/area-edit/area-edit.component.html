@@ -1,0 +1,35 @@
+  
+  <form [formGroup]="form" (ngSubmit)="updateArea()">
+
+    <div class="d-flex align-items-center">
+          <app-action-btns 
+          [showAdd]="true"
+          [showPrint]="true"
+          [showDelete]="false"
+          (onAdd)="navigateToCreate()"
+          >
+        </app-action-btns>
+        <app-submit-btns
+          [isSaveDisabled]="form.invalid"
+          [showSelected]="false"
+          (reset)="form.reset()">
+        </app-submit-btns>
+    </div>
+    
+    <div class="card p-3 mt-3">
+         <!--<app-breadcrump></app-breadcrump> -->
+      <div class="container-fluid mx-4">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="AreaName" class="mb-2 d-block">{{'Area Name'| translate}}</label>
+            <input pInputText type="text" id="AreaName" formControlName="Name" class="w-100 mb-2"/>
+            @if (isInvalid('Name')) {
+            <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Area Name is required'| translate}}
+            </p-message>
+          }
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

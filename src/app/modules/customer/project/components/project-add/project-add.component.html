@@ -1,0 +1,100 @@
+  
+  <form [formGroup]="form" (ngSubmit)="createProject()">
+     
+    <app-submit-btns
+    [isSaveDisabled]="form.invalid"
+    [showSelected]="false"
+    (reset)="form.reset()">
+  </app-submit-btns>
+
+  <div class="card p-3 mt-3">
+    <div class="container">
+      <div class="row">
+            <div class="col-md-4">
+            <label for="Name" class="mb-2 d-block">{{'  Name' | translate}}</label>
+            <input pInputText type="text" id="Name" formControlName="Name" class="w-100 mb-2"/>
+            @if (isInvalid('Name')) {
+            <p-message severity="error" class="text-danger" size="small" variant="simple">
+                {{' Name is required' | translate}}
+            </p-message>
+            }
+            </div>
+
+            <div class="col-md-4">
+            <label for="CompanyList" class="mb-2 d-block">{{'Company Name' | translate}}</label>
+
+            <app-auto-complete
+            class="w-100 mb-2"
+                [data]="companyList"
+                [displayField]="['Id', 'Name']"
+                [searchFields]="['Id', 'Name']"
+                [valueField]="'Id'"
+                [lookupData]="companyList"
+                formControlName="CompanyId"
+                [readonly]="false"
+                [validStyle]="isInvalid('CompanyId') ? 'ng-invalid' : ''">
+            </app-auto-complete>
+
+            @if (isInvalid('CompanyId')) {
+                <p-message severity="error" class="text-danger" size="small" variant="simple">
+                {{'Company is required' | translate}}
+                </p-message>
+            }
+            </div> 
+            
+            <div class="col-md-4">
+            <label for="CustomerList" class="mb-2 d-block">{{'Customer Name' | translate}}</label>
+
+            <app-auto-complete
+            class="w-100 mb-2"
+                [data]="customerList"
+                [displayField]="['Id', 'EnName', 'ArName']"
+                [searchFields]="['Id', 'EnName', 'ArName']"
+                [valueField]="'Id'"
+                [lookupData]="customerList"
+                formControlName="CustomerId"
+                [readonly]="false"
+                [validStyle]="isInvalid('CustomerId') ? 'ng-invalid' : ''">
+            </app-auto-complete>
+
+            @if (isInvalid('CustomerId')) {
+                <p-message severity="error" class="text-danger" size="small" variant="simple">
+                {{'Customer is required' | translate}}
+                </p-message>
+            }
+            </div> 
+         
+            <div class="col-md-4">
+            <label for="LocationList" class="mb-2 d-block">{{'Location ' | translate}}</label>
+
+            <app-auto-complete
+            class="w-100 mb-2"
+                [data]="LocationList"
+                [displayField]="['Id', 'Name']"
+                [searchFields]="['Id', 'Name']"
+                [valueField]="'Id'"
+                [lookupData]="LocationList"
+                formControlName="LocationId"
+                [readonly]="false"
+                [validStyle]="isInvalid('LocationId') ? 'ng-invalid' : ''">
+            </app-auto-complete>
+
+            @if (isInvalid('LocationId')) {
+                <p-message severity="error" class="text-danger" size="small" variant="simple">
+                {{'Location is required' | translate}}
+                </p-message>
+            }
+            </div> 
+    <div class="col-md-4">
+            <label for="Name" class="mb-2 d-block">{{'  Date' | translate}}</label>
+            <input pInputText type="datetime-local" id="ProjectDate" formControlName="ProjectDate" class="w-100 mb-2"/>
+            @if (isInvalid('ProjectDate')) {
+            <p-message severity="error" class="text-danger" size="small" variant="simple">
+                {{' Project Date is required' | translate}}
+            </p-message>
+            }
+            </div>
+    </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+<div class="form-buttons">
+    <button type="submit"
+            [disabled]="isSaveDisabled"
+            class="submitBtn btn btn-primary btn-sm">
+      <i class="fa-solid fa-floppy-disk me-1 ms-2"></i> 
+      {{ route === 'edit' ? ('Edit' | translate) : ('Save' | translate) }}
+    </button>
+
+    <button type="button" (click)="reset.emit()" class="resetBtn btn btn-secondary btn-sm">
+     <i class="fa-solid fa-rotate-right me-1 ms-2"></i>
+      Cancel
+    </button>
+<!-- Print -->
+    <button class="btn printBtn btn-secondary btn-sm" (click)="print()">
+         <i class="fa-solid fa-print text-dark me-1 ms-2"></i>
+      print
+   
+    </button>
+
+    <!-- Action (dropdown and inside it delete btn) -->
+    <select class="form-select" *ngIf="showSelected">
+      <option selected>Actions <i class="fa-solid fa-gear ms-2"></i></option>
+      <option value="1">Delete <i class="fa-solid fa-trash ms-2 text-danger"></i></option>
+    </select>
+</div>

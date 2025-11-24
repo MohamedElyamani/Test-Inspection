@@ -1,0 +1,26 @@
+.invoice-header-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+.invoice-header-field input {
+  background: transparent;  
+  border: none;             
+  border-radius: 0;
+  font-size: 22px;
+  
+  font-weight: 600;
+  color: #33333394;
+  padding: 0px 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #3333331a;
+}
+
+.invoice-header-field input:focus {
+  outline: none;             /* No outline */
+  background: transparent;
+}

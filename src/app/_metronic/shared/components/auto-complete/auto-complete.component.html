@@ -1,0 +1,80 @@
+<div class="dropdown-wrapper w-100">
+  <div class="p-dropdown p-component w-100" (click)="toggleDropdown()" [ngClass]="{ 'p-focus': dropdownOpen }">
+    <div class="p-dropdown-label-container w-100">
+      <input
+        pInputText
+        type="text"
+        class="p-dropdown-label w-100"
+        [placeholder]="placeholder || 'Select item'"
+        [readonly]="false"
+        [(ngModel)]="selectedText"
+        (input)="onInputChange( $event )"
+      />
+    </div>
+    <div class="p-dropdown-trigger">
+      <span class="p-dropdown-trigger-icon pi pi-chevron-down"></span>
+    </div>
+  </div>
+
+  <!-- القائمة المنسدلة -->
+  <div class="p-dropdown-panel p-component" *ngIf="dropdownOpen">
+    <!-- مربع البحث -->
+    <div class="p-dropdown-header p-2">
+      <input
+        type="text"
+        pInputText
+        class="w-100"
+        placeholder="Search..."
+        (input)="onDropdownSearch($event)"
+      />
+    </div>
+
+    <!-- العناصر -->
+    <ul class="p-dropdown-items">
+      <li
+        *ngFor="let item of filteredDataAutocomplete"
+        class="p-dropdown-item"
+        (click)="handleSelection({ value: item }); closeDropdown()"
+      >
+        {{ item[displayField[0]] }} - {{ item[displayField[1]] }}
+      </li>
+    </ul>
+
+    <!-- زرار More Filter -->
+    <div class="p-dropdown-footer p-2 border-top more-filter-footer" (click)="openDialog($event)">
+      <div class="footer-content d-flex align-items-center justify-content-center gap-2">
+        <i class="pi pi-plus"></i>
+        <span>More Filter</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dialog -->
+  <p-dialog header="Advanced Search" [(visible)]="visible" [modal]="true" [style]="{ width: '60vw' }">
+    <p-table
+      [value]="filteredData"
+      [paginator]="true"
+      [rows]="5"
+      selectionMode="single"
+      [(selection)]="selectedData"
+      (onRowSelect)="handleSelection($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let field of searchFields">
+            <input type="text" pInputText (input)="filterGlobal($event, field)" placeholder="{{ field }}" />
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let field of searchFields">{{ field }}</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-data>
+        <tr [pSelectableRow]="data">
+          <td *ngFor="let field of searchFields">{{ data[field] }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-dialog>
+</div>

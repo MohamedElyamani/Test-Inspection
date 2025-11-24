@@ -1,0 +1,141 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="card">
+  <div class="d-flex align-items-center justify-content-between w-100">
+    <!-- Left: Add button -->
+    <div class="left-section">
+      <app-action-btns
+        [selectedRow]="selectedRowsList"
+        (onAdd)="navigateToCreate()"
+        [showAdd]="true"
+        [showDelete]="false"
+        [showPrint]="false"
+      >
+      </app-action-btns>
+    </div>
+
+    <!-- Center: Selected count + delete/print -->
+    <div class="center-section d-flex align-items-center justify-content-center gap-2">
+      <div *ngIf="selectedCount > 0">
+        <p class="selecte" disabled="true">{{ selectedCount }} selected</p>
+      </div>
+
+      <app-action-btns
+        [selectedRow]="selectedRowsList"
+        (onDelete)="handleDelete()"
+        [showAdd]="false"
+        [showDelete]="true"
+        [showPrint]="true"
+      >
+      </app-action-btns>
+    </div>
+
+    <!-- Right: Column selector -->
+    <div class="right-section">
+      <p-multiselect
+        [options]="columnsSchema"
+        [(ngModel)]="selectedColumns"
+        optionLabel="label"
+        defaultLabel="Select Columns"
+        [maxSelectedLabels]="3"
+        styleClass="w-100 md:w-80"
+        (onChange)="updateDisplayedColumns()"
+      >
+      </p-multiselect>
+    </div>
+  </div>
+
+  <!-- ✅ Data Table -->
+  <p-table
+    #dt
+    [value]="dataSource"
+    dataKey="Id"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [loading]="loading"
+    selectionMode="multiple"
+    [(selection)]="selectedRowsList"
+    (onRowSelect)="emitSelection()"
+    (onRowUnselect)="emitSelection()"
+    [tableStyle]="{ 'min-width': '60rem' }"
+  >
+    <!-- Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 2rem !important;" class="header">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+
+        <th
+          *ngFor="let col of displayedColumns; trackBy: trackByKey"
+          [pSortableColumn]="col.key"
+          class="header"
+        >
+          {{ col.label }}
+          <p-sortIcon [field]="col.key"></p-sortIcon>
+        </th>
+      </tr>
+
+      <!-- Filter row -->
+      <tr>
+        <th></th>
+        <th *ngFor="let col of displayedColumns">
+          <input
+            pInputText
+            type="text"
+            [value]="columnFilters[col.key] || ''"
+            (input)="filterColumn($event, col.key)"
+            placeholder="Search {{ col.label }}"
+          />
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- ✅ Body -->
+    <ng-template pTemplate="body" let-rowData>
+      <tr [pSelectableRow]="rowData">
+        <td>
+          <p-tableCheckbox [value]="rowData" (click)="$event.stopPropagation()"></p-tableCheckbox>
+        </td>
+
+        <td
+          *ngFor="let col of displayedColumns; trackBy: trackByKey"
+          (click)="onRowClick(rowData)"
+        >
+          <!-- ✅ Custom template -->
+          <ng-container
+            *ngIf="col.template; else defaultCell"
+            [ngTemplateOutlet]="col.template"
+            [ngTemplateOutletContext]="{
+              row: rowData,
+              value: rowData[col.key],
+              col: col
+            }"
+          ></ng-container>
+
+          <!-- ✅ Default cell -->
+          <ng-template #defaultCell>
+            <span
+              [innerHTML]="
+                col.formatter
+                  ? col.formatter(rowData[col.key], rowData)
+                  : rowData[col.key]
+              "
+            ></span>
+          </ng-template>
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- Empty Message -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="columnsSchema.length + 1" class="text-center">
+          No data found
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,303 @@
+<form [formGroup]="form" autocomplete="off" (ngSubmit)="updateInspection()">
+
+    <app-submit-btns [isSaveDisabled]="form.invalid" [showSelected]="false" (reset)="form.reset()">
+    </app-submit-btns>
+ 
+
+  <div class="card p-3">
+    <div class="container-fluid mx-4">
+      <div class="row">
+        <div class="invoice-header-field">
+          <label for="RequestNumber">{{ 'Request Number' | translate }}</label>
+          <input type="text" id="RequestNumber" formControlName="RequestNumber" />
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label for="ItemToBeInspected" class="mb-2 d-block">{{ 'Item To Be Inspected' | translate }}</label>
+          <input pInputText id="ItemToBeInspected" formControlName="ItemToBeInspected" class="w-100 mb-2" />
+          @if (isInvalid('ItemToBeInspected')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'ItemToBeInspected is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label for="EquipmentQty" class="mb-2 d-block">{{ 'Equipment Quatity' | translate }}</label>
+          <p-inputnumber inputId="EquipmentQty" formControlName="EquipmentQty" class="w-100 mb-2" />
+          @if (isInvalid('EquipmentQty')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'EquipmentQty is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Request Type' | translate }}</label>
+          <app-auto-complete
+            class="w-100 mb-2"
+            [data]="servTypeList"
+            [displayField]="['Id','Name']"
+            [searchFields]="['Id','Name']"
+            [valueField]="'Id'"
+            [lookupData]="servTypeList"
+            formControlName="ServiceTypeId"
+            [readonly]="false"
+            [validStyle]="isInvalid('ServiceTypeId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          @if (isInvalid('ServiceTypeId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'RequestType is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Location Name' | translate }}</label>
+          <app-auto-complete
+            class="w-100 mb-2"
+            [data]="LocationList"
+            [displayField]="['Id','Name']"
+            [searchFields]="['Id','Name']"
+            [valueField]="'Id'"
+            [lookupData]="LocationList"
+            formControlName="LocationId"
+            [readonly]="false"
+            [validStyle]="isInvalid('LocationId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          @if (isInvalid('LocationId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Location is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Project' | translate }}</label>
+          <app-auto-complete
+            class="w-100 mb-2"
+            [data]="ProjectList"
+            [displayField]="['Id','Name']"
+            [searchFields]="['Id','Name']"
+            [valueField]="'Id'"
+            [lookupData]="ProjectList"
+            formControlName="ProjectId"
+            [readonly]="false"
+            [validStyle]="isInvalid('ProjectId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+          @if (isInvalid('ProjectId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Project is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Status' | translate }}</label>
+          <p-dropdown
+            [options]="StatusList"
+            optionLabel="Name"
+            optionValue="Id"
+            formControlName="Status"
+            [filter]="true"
+            placeholder="{{ 'Select status' | translate }}"
+            [showClear]="true"
+            [style]="{ width: '100%' }">
+          </p-dropdown>
+          @if (isInvalid('Status')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Status is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Contact Person' | translate }}</label>
+          <input pInputText formControlName="ContactPerson" class="w-100 mb-2" />
+          @if (isInvalid('ContactPerson')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'ContactPerson is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Contact Person Phone' | translate }}</label>
+          <input pInputText formControlName="ContactPersonPhone" class="w-100 mb-2" />
+          @if (isInvalid('ContactPersonPhone')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'ContactPersonPhone is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Contact Person Email' | translate }}</label>
+          <input pInputText type="email" formControlName="ContactPersonEmail" class="w-100 mb-2" />
+          @if (isInvalid('ContactPersonEmail')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'ContactPersonEmail is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Available Date' | translate }}</label>
+          <p-datePicker [showIcon]="true" formControlName="AvailableDate" class="w-100 mb-2" />
+          @if (isInvalid('AvailableDate')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'AvailableDate is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Request Date' | translate }}</label>
+          <p-datePicker [showIcon]="true" formControlName="RequestDate" class="w-100 mb-2" />
+          @if (isInvalid('RequestDate')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'RequestDate is required' | translate }}
+          </p-message>
+          }
+        </div>
+
+
+        <!-- ================= Details (IsSubcontractor = false) =================== -->
+     <div class="details mb-5">
+  <h5 class="fw-bold mb-3">{{ 'Details' | translate }}</h5>
+
+  <table class="table table-responsive table-input w-100">
+    <thead>
+      <tr>
+        <th>{{ 'Item' | translate }}</th>
+        <th>{{ 'Amount' | translate }}</th>
+        <th>{{ 'Method Used' | translate }}</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody formArrayName="InspectionRequestDetail">
+      <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+
+        <!-- ITEM -->
+        <td>
+          
+          <app-auto-complete
+            class="w-100 mb-2"
+            [data]="detailsLookup"
+            [displayField]="['Id', 'Itemtitle']"
+            [searchFields]="['Id', 'Itemtitle']"
+            [valueField]="'Id'"
+            formControlName="itemid">
+          </app-auto-complete>
+        </td>
+
+        <!-- AMOUNT -->
+        <td>
+          <input pInputText formControlName="amount" />
+        </td>
+
+        <!-- METHOD USED -->
+        <td>
+          <input pInputText formControlName="InspectionMethodName" readonly />
+           <input type="hidden" formControlName="InspectionMethodId" />
+        </td>
+
+        <!-- DELETE -->
+        <td>
+          <i class="fa-solid fa-trash-can"
+             (click)="removeItem(i)"
+             style="color: red; cursor: pointer;">
+          </i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a class="addItem mt-3">
+    <i class="fa-solid fa-plus" (click)="addItem()" style="cursor:pointer;"></i>
+  </a>
+</div>
+<hr/>
+
+        <!-- ============ Subcontractor Details (IsSubcontractor = true) ============ -->
+     <div class="details mb-5">
+  <h5 class="fw-bold mb-3">{{ 'Subcontractor Details' | translate }}</h5>
+
+  <table class="table table-responsive table-input w-100">
+    <thead>
+      <tr>
+        <th>{{ 'Item' | translate }}</th>
+        <th>{{ 'Amount' | translate }}</th>
+        <th>{{ 'Method Used' | translate }}</th>
+        <th>{{ 'Subcontractor' | translate }}</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody formArrayName="InspectionRequestSubcontractorDetail">
+      <tr *ngFor="let row of subcontractorItems.controls; let i = index" [formGroupName]="i">
+
+        <!-- ITEM -->
+        <td>
+          <app-auto-complete
+            class="w-100 mb-2"
+            [data]="subcontractorLookup"
+            [displayField]="['Id', 'Itemtitle']"
+            [searchFields]="['Id', 'Itemtitle']"
+            [valueField]="'Id'"
+            formControlName="itemid">
+          </app-auto-complete>
+        </td>
+
+        <!-- AMOUNT -->
+        <td>
+          <input pInputText formControlName="amount" />
+        </td>
+
+        <!-- METHOD USED -->
+        <td>
+          <input pInputText formControlName="InspectionMethodName" readonly />
+           <input type="hidden" formControlName="InspectionMethodId" />
+        </td>
+
+        <!-- SUBCONTRACTOR -->
+        <td>
+          <input pInputText formControlName="subcontractorname" />
+        </td>
+
+        <!-- DELETE -->
+        <td>
+          <i class="fa-solid fa-trash-can"
+             (click)="removeSubcontractorItem(i)"
+             style="color: red; cursor: pointer;">
+          </i>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <a class="addItem mt-3">
+    <i class="fa-solid fa-plus" (click)="addSubcontractorItem()" style="cursor:pointer;"></i>
+  </a>
+</div>
+
+
+        <hr />
+        
+        <div class="col-md-12">
+          <label class="mb-2 d-block">{{ 'Notes' | translate }}</label>
+          <textarea
+            pInputText
+            formControlName="Notes"
+            class="w-100 mb-2"
+            rows="3"
+            autoResize="true"
+            placeholder="Enter Notes..."></textarea>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,197 @@
+<form [formGroup]="form" (ngSubmit)="createQuotation()">
+  <app-submit-btns [isSaveDisabled]="form.invalid" [showSelected]="false" (reset)="form.reset()">
+  </app-submit-btns>
+  <div class="card p-3 mt-3">
+      <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      <div class="row">
+        <!-- ================== Master Data ================== -->
+        <div class="invoice-header-field">
+          <label for="QuotationNumber" class="mb-2 d-block">{{'Quotation Number' | translate}}</label>
+          <input type="text" id="QuotationNumber" formControlName="QuotationNumber" class="w-100 mb-2" />
+       
+        </div>
+        <div class="col-md-4 mb-5">
+          <label for="CustomerList" class="mb-2 d-block">{{'Customer Name' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="customerList" [displayField]="['Id', 'EnName', 'ArName']"
+            [searchFields]="['Id', 'EnName', 'ArName']" [valueField]="'Id'" [lookupData]="customerList"
+            formControlName="CustomerId" [readonly]="false" [validStyle]="isInvalid('CustomerId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('CustomerId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Customer is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <div class="col-md-4 mb-5">
+          <label for="LocationList" class="mb-2 d-block">{{'Location Name' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="locationList" [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']" [valueField]="'Id'" [lookupData]="locationList" formControlName="LocationId"
+            [readonly]="false" [validStyle]="isInvalid('LocationId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('LocationId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Location is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- ==================================== -->
+        <div class="col-md-4 mb-5">
+          <label for="ContactName" class="mb-2 d-block">{{'Contact Name' | translate}}</label>
+          <input pInputText type="text" id="ContactName" formControlName="ContactName" class="w-100 mb-2" />
+          @if (isInvalid('ContactName')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'ContactName is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <div class="col-md-4 mb-5">
+          <label for="IssueDate" class="mb-2 d-block">{{'Issue Date' | translate}}</label>
+          <p-datePicker [showIcon]="true" id="IssueDate" formControlName="IssueDate" class="w-100 mb-2" />
+          @if (isInvalid('IssueDate')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'IssueDate is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <div class="col-md-4 mb-5">
+          <label for="ExpireDate" class="mb-2 d-block">{{'Expire Date' | translate}}</label>
+          <p-datePicker [showIcon]="true" id="ExpireDate" formControlName="ExpireDate" class="w-100 mb-2" />
+          @if (isInvalid('ExpireDate')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'ExpireDate is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- ==================================== -->
+        <div class="col-md-3 mb-5">
+          <label for="ReferenceNumber" class="mb-2 d-block">{{'Reference Number' | translate}}</label>
+          <input pInputText type="text" id="ReferenceNumber" formControlName="ReferenceNumber" class="w-100 mb-2" />
+
+        </div>
+
+        <div class="col-md-3 mb-5">
+          <label for="PONumber" class="mb-2 d-block">{{'Phone Number' | translate}}</label>
+          <input pInputText type="text" id="PONumber" formControlName="PONumber" class="w-100 mb-2" />
+        </div>
+
+        <div class="col-md-3 mb-5">
+          <label for="SalespersonId" class="mb-2 d-block">{{'Sales person' | translate}}</label>
+          <input pInputText type="text" id="SalespersonId" formControlName="SalespersonId" class="w-100 mb-2" />
+
+        </div>
+
+        <div class="col-md-3 mb-5">
+          <label for="VersionNumber" class="mb-2 d-block">{{'Version Number' | translate}}</label>
+          <input pInputText type="text" id="VersionNumber" formControlName="VersionNumber" class="w-100 mb-2" />
+
+        </div>
+        <!-- ==================================== -->
+        <div class="col-md-4 mb-5">
+          <label for="CheckedBy" class="mb-2 d-block">{{'Checked By' | translate}}</label>
+          <input pInputText type="text" id="CheckedBy" formControlName="CheckedBy" class="w-100 mb-2" />
+        </div>
+        <!--  branchId -->
+        <div class="col-md-4 mb-5">
+          <label for="branchList" class="mb-2 d-block">{{'Branch Name' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="branchList" [displayField]="['Id', 'NameEn', 'NameAr']"
+            [searchFields]="['Id', 'NameEn', 'NameAr']" [valueField]="'Id'" [lookupData]="branchList"
+            formControlName="BranchId" [readonly]="false" [validStyle]="isInvalid('BranchId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('BranchId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Branch is required' | translate}}
+          </p-message>
+          }
+        </div>
+        <!-- areaId -->
+        <div class="col-md-4 mb-5">
+          <label for="areaList" class="mb-2 d-block">{{'Area Name' | translate}}</label>
+
+          <app-auto-complete class="w-100 mb-2" [data]="areaList" [displayField]="['Id', 'Name']"
+            [searchFields]="['Id', 'Name']" [valueField]="'Id'" [lookupData]="areaList" formControlName="AreaId"
+            [readonly]="false" [validStyle]="isInvalid('AreaId') ? 'ng-invalid' : ''">
+          </app-auto-complete>
+
+          @if (isInvalid('AreaId')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Area is required' | translate}}
+          </p-message>
+          }
+        </div>
+
+        <!-- ================= detailes data =================== -->
+        <div class="details mb-5">
+          <h5 class="fw-bold mb-3">{{ 'Sales Quotation Items' | translate }}</h5>
+          <table class="table table-responsive table-input w-100">
+            <thead>
+              <tr>
+                <th>{{ 'Item' | translate }}</th>
+                <th>{{ 'Price' | translate }}</th>
+                <th>{{ 'Quantity' | translate }}</th>
+                <th>{{ 'Tax (%)' | translate }}</th>
+                <th>{{ 'Total' | translate }}</th>
+                <th>{{ 'Description' | translate }}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody formArrayName="SalesQuotationItems">
+              <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+                <td>
+                  <app-auto-complete class="w-100 mb-2" [data]="serviceItemList" placeholder=""
+                    [displayField]="['Id', 'Itemtitle']" [searchFields]="['Id', 'Itemtitle']" [valueField]="'Id'"
+                    [lookupData]="serviceItemList" formControlName="itemid" [readonly]="false"
+                    [validStyle]="isInvalid('itemid') ? 'ng-invalid' : ''">
+                  </app-auto-complete>
+
+                  @if (isInvalid('itemid')) {
+                  <p-message severity="error" class="text-danger" size="small" variant="simple">
+                    {{'Item is required' | translate}}
+                  </p-message>
+                  }
+                </td>
+                <td><input pInputText formControlName="price" type="number" /></td>
+                <td><input pInputText formControlName="qty" type="number" /></td>
+                <td><input pInputText formControlName="tax" type="number" /></td>
+                <td><input pInputText formControlName="total" readonly style="background-color: #E2E8F0;" /></td>
+                <td><input pInputText formControlName="description" /></td>
+                <td><i class="fa-solid fa-trash-can" (click)="removeItem(i)" style="color: red; cursor: pointer;"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="addItem mt-3">
+            <i class="fa-solid fa-plus" (click)="addItem()"></i>
+          </a>
+        </div>
+        <hr>
+        <!-- ==================================== -->
+        <div class="col-md-3 mb-5">
+          <label for="SubTotal" class="mb-2 d-block">{{'Sub Total' | translate}}</label>
+          <input pInputText type="number" id="SubTotal" formControlName="SubTotal" class="w-100 mb-2" />
+        </div>
+
+        <div class="col-md-3 mb-5">
+          <label for="Discount" class="mb-2 d-block">{{'Discount' | translate}}</label>
+          <input pInputText type="number" id="Discount" formControlName="Discount" class="w-100 mb-2" />
+        </div>
+
+        <div class="col-md-3 mb-5">
+          <label for="TaxValue" class="mb-2 d-block">{{'Tax (%)' | translate}}</label>
+          <input pInputText type="number" id="TaxValue" formControlName="TaxValue" class="w-100 mb-2" />
+        </div>
+
+        <div class="col-md-3 mb-5">
+          <label for="TotalAmount" class="mb-2 d-block">{{'Total Amount' | translate}}</label>
+          <input pInputText type="number" id="TotalAmount" formControlName="TotalAmount" class="w-100 mb-2" />
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

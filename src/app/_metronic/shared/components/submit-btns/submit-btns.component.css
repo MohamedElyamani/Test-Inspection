@@ -1,0 +1,68 @@
+/* ===== Toolbar Container ===== */
+.form-buttons {
+  background-color: #ffffff;      /* light gray background */
+  border-radius: 0.625rem;            /* soft rounded look */
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;                      /* even spacing between buttons */
+  flex-wrap: wrap;   
+   margin-bottom: 7px;
+  border-color: #003366;
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);;
+}
+
+/* ===== General Button Style ===== */
+.form-buttons .btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: #003366;
+  background: none !important;
+  border: none !important;
+  font-size: 15px;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 0.4rem 0.8rem;
+}
+
+/* ===== Icon Styling ===== */
+.form-buttons .btn i {
+  color: #003366;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ===== Hover & Focus ===== */
+
+
+
+
+/* ===== Disabled Button ===== */
+.form-buttons .btn:disabled {
+  color: #999;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== Dropdown (Actions Select) ===== */
+.form-buttons .form-select {
+  border: none;
+  background: none;
+  color: #003366;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  width: auto;
+}
+
+.form-buttons .form-select:focus {
+  box-shadow: none;
+  border: 1px solid #0056b3;
+}
+
+/* ===== Optional: icon alignment inside select (cosmetic only) ===== */
+.form-buttons .form-select option i {
+  margin-left: 0.4rem;
+}

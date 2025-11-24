@@ -1,0 +1,273 @@
+<form [formGroup]="form" autocomplete="off" (ngSubmit)="AddCompanyEquipment()">
+  <app-submit-btns [isSaveDisabled]="form.invalid" [showSelected]="false" (reset)="form.reset()"></app-submit-btns>
+
+  <div class="card p-3">
+    <div class="container-fluid mx-4">
+      <div class="row">
+
+        <!-- Name -->
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Name' | translate }}</label>
+          <input pInputText formControlName="Name" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('Name')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Name is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Description -->
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Description' | translate }}</label>
+          <input pInputText formControlName="Description" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('Description')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Description is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Model -->
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Model' | translate }}</label>
+          <input pInputText formControlName="Model" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('Model')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Model is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Manufacturer -->
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Manufacturer' | translate }}</label>
+          <input pInputText formControlName="Manufacturer" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('Manufacturer')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Manufacturer is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Serial Number -->
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Serial Number' | translate }}</label>
+          <input pInputText formControlName="SerialNumber" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('SerialNumber')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Serial Number is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Equipment Id -->
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Id No' | translate }}</label>
+          <input pInputText formControlName="EquipmentIdNo" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('EquipmentIdNo')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Id No is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Equipment Location -->
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Location' | translate }}</label>
+          <input pInputText formControlName="EquipmentLocation" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('EquipmentLocation')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Location is required' | translate }}
+          </p-message>
+        </div>
+
+        <!-- Calibration Status -->
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Status' | translate }}</label>
+        <select formControlName="CalibrationStatus" class="form-select">
+          <option value="" disabled selected>Select</option>
+          <option value="Calibrated">Calibrated</option>
+          <option value="NotCalibrated">Not Calibrated</option>
+        </select>
+
+          <p-message *ngIf="isInvalid('CalibrationStatus')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Status is required' | translate }}
+          </p-message>
+        </div>
+    <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Calibration Date' | translate }}</label>
+          <input pInputText formControlName="CalibrationDate" class="w-100 mb-2" type="date" />
+          <p-message *ngIf="isInvalid('CalibrationDate')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Calibration Date is required' | translate }}
+          </p-message>
+        </div>
+        <!-- Storage & Operation -->
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Storage Condition Temperature' | translate }}</label>
+          <input pInputText formControlName="StorageConditionTemperature" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('StorageConditionTemperature')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Storage Condition Temperature is required' | translate }}
+          </p-message>
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Internal Operation Temperature' | translate }}</label>
+          <input pInputText formControlName="InternalOperationTemperature" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('InternalOperationTemperature')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Internal Operation Temperature is required' | translate }}
+          </p-message>
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Storage Condition Relative Humidity' | translate }}</label>
+          <input pInputText formControlName="StorageConditionRelativeHumidity" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('StorageConditionRelativeHumidity')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Storage Condition Relative Humidity is required' | translate }}
+          </p-message>
+        </div>
+
+        <div class="col-md-4 mb-5">
+          <label class="mb-2 d-block">{{ 'Internal Operation Relative Humidity' | translate }}</label>
+          <input pInputText formControlName="InternalOperationRelativeHumidity" class="w-100 mb-2" />
+          <p-message *ngIf="isInvalid('InternalOperationRelativeHumidity')" severity="error" class="text-danger" size="small" variant="simple">
+            {{ 'Internal Operation Relative Humidity is required' | translate }}
+          </p-message>
+        </div>
+
+   
+        <hr />
+
+        <!-- ================= Equipment Accessories =================== -->
+        <div class="details mb-5" formArrayName="EquipmentAccessories">
+          <h5 class="fw-bold mb-3">{{ 'Equipment Accessories' | translate }}</h5>
+          <table class="table table-responsive table-input w-100">
+            <thead>
+              <tr>
+                <th>{{ 'Description' | translate }}</th>
+                <th>{{ 'Model' | translate }}</th>
+                <th>{{ 'S.No.' | translate }}</th>
+                <th>{{ 'Status' | translate }}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let accessory of EquipmentAccessory.controls; let i = index" [formGroupName]="i">
+                <td><input pInputText formControlName="Description" placeholder="Description" class="w-100" /></td>
+                <td><input pInputText formControlName="Model" placeholder="Model" class="w-100" /></td>
+                <td><input pInputText formControlName="SerialNumber" placeholder="Serial No." class="w-100" /></td>
+                <td>
+                   <select formControlName="Status" class="form-select">
+                    <option value="">Select</option>
+                    <option value="Stopped">Stopped</option>
+                    <option value="Working">Working</option>
+                    <option value="HaveProplem">Have Proplem</option>
+                  </select>
+                </td>
+                <td>
+                  <i class="fa-solid fa-trash-can" (click)="removeEquipmentAccessory(i)" style="color:red;cursor:pointer;"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="addItem mt-3"><i class="fa-solid fa-plus" (click)="addEquipmentAccessory()" style="cursor:pointer;"></i></a>
+        </div>
+
+        <!-- ================= Equipment Software =================== -->
+        <div class="details mb-5" formArrayName="EquipmentSoftwares">
+          <h5 class="fw-bold mb-3">{{ 'Equipment Software' | translate }}</h5>
+          <table class="table table-responsive table-input w-100">
+            <thead>
+              <tr>
+                <th>{{ 'Description' | translate }}</th>
+                <th>{{ 'Manufacturer' | translate }}</th>
+                <th>{{ 'Version' | translate }}</th>
+                <th>{{ 'Notes' | translate }}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sw of EquipmentSoftwar.controls; let i = index" [formGroupName]="i">
+                <td><input pInputText formControlName="Description" placeholder="Description" class="w-100" /></td>
+                <td><input pInputText formControlName="Manufacturer" placeholder="Manufacturer" class="w-100" /></td>
+                <td><input pInputText formControlName="Version" placeholder="Version" class="w-100" /></td>
+                <td><input pInputText formControlName="Notes" placeholder="Notes" class="w-100" /></td>
+                <td><i class="fa-solid fa-trash-can" (click)="removeEquipmentSoftware(i)" style="color:red;cursor:pointer;"></i></td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="addItem mt-3"><i class="fa-solid fa-plus" (click)="addEquipmentSoftware()" style="cursor:pointer;"></i></a>
+        </div>
+
+        <!-- ================= Equipment Calibration History =================== -->
+        <div class="details mb-5" formArrayName="EquipmentCalibrationHistorys">
+          <h5 class="fw-bold mb-3">{{ 'Equipment Calibration History' | translate }}</h5>
+          <table class="table table-responsive table-input w-100">
+            <thead>
+              <tr>
+                <th>{{ 'Certificate No' | translate }}</th>
+                <th>{{ 'Calibration Body' | translate }}</th>
+                <th>{{ 'Calibration Date' | translate }}</th>
+                <th>{{ 'Expiry Date' | translate }}</th>
+                <th>{{ 'Note' | translate }}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cal of EquipmentCalibrationHistor.controls; let i = index" [formGroupName]="i">
+                <td><input pInputText formControlName="CertificateNo" class="w-100" /></td>
+                <td><input pInputText formControlName="CalibrationBody" class="w-100" /></td>
+                <td><input type="date" formControlName="CalDate" class="w-100" /></td>
+                <td><input type="date" formControlName="ExpiryDate" class="w-100" /></td>
+                <td><input pInputText formControlName="Note" class="w-100" /></td>
+                <td><i class="fa-solid fa-trash-can" (click)="removeEquipmentCalibrationHistory(i)" style="color:red;cursor:pointer;"></i></td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="addItem mt-3"><i class="fa-solid fa-plus" (click)="addEquipmentCalibrationHistory()" style="cursor:pointer;"></i></a>
+        </div>
+
+        <!-- ================= Equipment Preventive Maintenance =================== -->
+        <div class="details mb-5" formArrayName="EquipmentPreventiveMaintenances">
+          <h5 class="fw-bold mb-3">{{ 'Equipment Preventive Maintenance' | translate }}</h5>
+          <table class="table table-responsive table-input w-100">
+            <thead>
+              <tr>
+                <th>{{ 'Action' | translate }}</th>
+                <th>{{ 'Frequency' | translate }}</th>
+                <th>{{ 'Date' | translate }}</th>
+                <th>{{ 'Performed By' | translate }}</th>
+                <th>{{ 'Note' | translate }}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pm of EquipmentPreventiveMaintenanc.controls; let i = index" [formGroupName]="i">
+                <td><input pInputText formControlName="Action" class="w-100" /></td>
+                <td><input pInputText formControlName="Frequency" class="w-100" /></td>
+                <td><input type="date" formControlName="Dte" class="w-100" /></td>
+                <td><input pInputText formControlName="PerformedBy" class="w-100" /></td>
+                <td><input pInputText formControlName="Note" class="w-100" /></td>
+                <td><i class="fa-solid fa-trash-can" (click)="removeEquipmentPreventiveMaintenance(i)" style="color:red;cursor:pointer;"></i></td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="addItem mt-3"><i class="fa-solid fa-plus" (click)="addEquipmentPreventiveMaintenance()" style="cursor:pointer;"></i></a>
+        </div>
+
+        <!-- ================= Equipment Maintenance & Repair =================== -->
+        <div class="details mb-5" formArrayName="EquipmentMaintenanceAndRepairRecords">
+          <h5 class="fw-bold mb-3">{{ 'Equipment Maintenance & Repair Record' | translate }}</h5>
+          <table class="table table-responsive table-input w-100">
+            <thead>
+              <tr>
+                <th>{{ 'Maintenance No' | translate }}</th>
+                <th>{{ 'Date' | translate }}</th>
+                <th>{{ 'Description of Work Done' | translate }}</th>
+                <th>{{ 'Results' | translate }}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let mr of EquipmentMaintenanceAndRepaireRecord.controls; let i = index" [formGroupName]="i">
+                <td><input pInputText formControlName="MaintenanceNo" class="w-100" /></td>
+                <td><input type="date" formControlName="Dte" class="w-100" /></td>
+                <td><input pInputText formControlName="DescriptionOfWorkDone" class="w-100" /></td>
+                <td><input pInputText formControlName="Results" class="w-100" /></td>
+                <td><i class="fa-solid fa-trash-can" (click)="removeEquipmentMaintenanceAndRepairRecord(i)" style="color:red;cursor:pointer;"></i></td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="addItem mt-3"><i class="fa-solid fa-plus" (click)="addEquipmentMaintenanceAndRepairRecord()" style="cursor:pointer;"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>

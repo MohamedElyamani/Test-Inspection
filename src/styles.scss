@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/sass/style.scss";
+// Replace above style with this css file to enable RTL styles
+// @import "./assets/css/style.rtl";
+@import './assets/sass/plugins.scss';
+// @import "./assets/css/style.rtl.css";
+@import "./assets/sass/style.angular.scss";
+
+// Keenicons - High quality and pixel perfect font icons available in 3 styles, duotone, outline and solid for Metronic elements
+@import "./assets/plugins/keenicons/duotone/style.css";
+@import "./assets/plugins/keenicons/outline/style.css";
+@import "./assets/plugins/keenicons/solid/style.css";
+
+// Angular Material Theme
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+
+// Toastr CSS
+@import 'ngx-toastr/toastr';
+
+
+body{
+  background-color: #f9fafb !important;
+}
+.p-datepicker {
+  width: 100% !important;
+}
+.row > *{
+  padding-left: 0px !important;
+}
+label{
+      font-weight: 700;
+    font-size: larger;
+}
+.invoice-header-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+.invoice-header-field input {
+  background: transparent;  
+  border-bottom: none;             
+  border-radius: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  padding: 8px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.invoice-header-field input:focus {
+  outline: none;             /* No outline */
+  background: transparent;
+}
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item.here > .menu-link .menu-title {
+  color: #9a9cae !important;
+}

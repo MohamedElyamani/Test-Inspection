@@ -1,0 +1,95 @@
+  <form [formGroup]="form" (ngSubmit)="updateSeries()">
+
+    <div class="d-flex align-items-center">
+        
+        <app-submit-btns
+          [isSaveDisabled]="form.invalid"
+          [showSelected]="false"
+          (reset)="form.reset()">
+        </app-submit-btns>
+    </div>
+    
+  <div class="card p-3">
+        <!--<app-breadcrump></app-breadcrump> -->
+    <div class="container-fluid mx-4">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="SeriesCode" class="mb-2 d-block">{{'Series Code'| translate}}</label>
+          <input pInputText type="text" id="SeriesCode" formControlName="SeriesCode" class="w-100 mb-2"/>
+          @if (isInvalid('SeriesCode')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+                {{'Series Code is required'| translate}}
+          </p-message>
+        }
+        </div>
+
+        <div class="col-md-6">
+          <label for="SeriesName" class="mb-2 d-block">{{'Series Name'| translate}}</label>
+          <input pInputText type="text" id="SeriesName" formControlName="SeriesName" class="w-100 mb-2"/>
+          @if (isInvalid('SeriesName')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+            {{'Series Name is required'| translate}}
+          </p-message>
+        }
+        </div>
+
+        <div class="col-md-6">
+          <label for="Separator" class="mb-2 d-block">{{'Seperator'| translate}}</label>
+          <input pInputText type="text" id="Separator" formControlName="Separator" class="w-100 mb-2"/>
+          @if (isInvalid('Separator')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+           {{'Separator is required'| translate}}
+          </p-message>
+        }
+        </div>
+
+        <div class="col-md-6">
+          <label for="PaddingLength" class="mb-2 d-block">{{'Paading Length'| translate}}</label>
+          <input pInputText type="text" id="PaddingLength" formControlName="PaddingLength" class="w-100 mb-2"/>
+          @if (isInvalid('PaddingLength')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+          {{'Padding Length is required' | translate}}
+          </p-message>
+        }
+        </div>
+ <div class="col-md-6">
+  <label for="ScreenCode_Id" class="mb-2 d-block">{{'Screen Code'| translate}}</label>
+
+  <app-auto-complete
+  class="w-100 mb-2"
+    [data]="screenCodeList"
+    [displayField]="['Screen_ID', 'Screen_Name']"
+    [searchFields]="['Screen_ID', 'Screen_Name']"
+    [valueField]="'Screen_ID'"
+    [lookupData]="screenCodeList"
+    formControlName="ScreenCode_Id"
+    [readonly]="false"
+    [validStyle]="isInvalid('ScreenCode_Id') ? 'ng-invalid' : ''">
+  </app-auto-complete>
+
+  @if (isInvalid('ScreenCode_Id')) {
+    <p-message severity="error" class="text-danger" size="small" variant="simple">
+      {{'Screen Code is required' | translate}}
+    </p-message>
+  }
+</div> 
+        <div class="col-md-6">
+          <label for="ResetPolicy" class="mb-2 d-block">{{'Reset Policy' | translate}}</label>
+          <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center me-5" *ngFor="let item of ResetPolicyOptions">
+              <p-radiobutton [value]="item.value" formControlName="ResetPolicy"></p-radiobutton>
+              <label class="ms-2">{{ item.label | translate}}</label>
+            </div>
+          </div>
+            
+          @if (isInvalid('ResetPolicy')) {
+          <p-message severity="error" class="text-danger" size="small" variant="simple">
+           {{'Reset Policy is required' | translate}}
+          </p-message>
+        }
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
